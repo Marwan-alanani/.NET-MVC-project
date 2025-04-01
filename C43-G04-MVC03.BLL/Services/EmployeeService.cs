@@ -1,11 +1,13 @@
 namespace C43_G04_MVC03.BLL.Services;
-public class EmployeeService(IUnitOfWork unitOfWork,
-    IMapper mapper ,
+
+public class EmployeeService(
+    IUnitOfWork unitOfWork,
+    IMapper mapper,
     IAttachmentService attachmentService) : IEmployeeService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IMapper _mapper = mapper;
-    private readonly IAttachmentService _attachmentService = attachmentService; 
+    private readonly IAttachmentService _attachmentService = attachmentService;
 
 
     // Get All
@@ -43,7 +45,8 @@ public class EmployeeService(IUnitOfWork unitOfWork,
                 Salary = e.Salary,
                 EmployeeType = e.EmployeeType.ToString(),
                 IsActive = e.IsActive,
-                Department = e.Department.Name
+                Department = e.Department.Name,
+                Image = e.ImageName,
             }, e => !e.IsDeleted, e => e.Department);
         }
         else
@@ -76,8 +79,12 @@ public class EmployeeService(IUnitOfWork unitOfWork,
     // Add
     public int Add(EmployeeRequest request)
     {
-         _unitOfWork.Employees.Add(_mapper.Map<Employee>(request));
-         return _unitOfWork.SaveChanges();
+        var employee = _mapper.Map<Employee>(request);
+        if (request.Image is not null)
+            employee.ImageName = _attachmentService.Upload(request.Image, "Imgs");
+        _unitOfWork.Employees.Add(employee);
+
+        return _unitOfWork.SaveChanges();
     }
 
     // Update

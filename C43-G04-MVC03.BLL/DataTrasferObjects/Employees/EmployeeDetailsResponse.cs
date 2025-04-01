@@ -18,4 +18,5 @@ public class EmployeeDetailsResponse
     public int LastModifiedBy { get; set; }
     public DateTime LastModifiedOn { get; set; }
     public string? Department { get; set; }
+    public string? Image { get; set; }
 }

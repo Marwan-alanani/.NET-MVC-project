@@ -4,7 +4,6 @@ public class Program
     public static void Main()
     {
         var builder = WebApplication.CreateBuilder();
-
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddDbContext<ApplicationDbContext>(options =>

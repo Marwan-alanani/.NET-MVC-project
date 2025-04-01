@@ -1,6 +1,3 @@
-global using System.ComponentModel.DataAnnotations;
-global using C43_G04_MVC03.Presentation.DAL.Models.Common;
-
 namespace C43_G04_MVC03.BLL.DataTrasferObjects.Employees;
 
 public class EmployeeRequest
@@ -29,6 +26,8 @@ public class EmployeeRequest
     public EmployeeType EmployeeType { get; set; }
     [Display(Name = "Department")]
     public int? DepartmentId { get; set; }
+
+    public IFormFile Image { get; set; }
 }
 // Add Related Data either with adding FK or
 // with navigational property

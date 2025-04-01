@@ -8,11 +8,19 @@ internal class EmployeeProfile : Profile
         CreateMap<Employee, EmployeeDetailsResponse>()
             .ForMember(d => d.Department,
                 options =>
-                    options.MapFrom(src => src.Department.Name));
+                    options.MapFrom(src => src.Department.Name))
+            .ForMember(d => d.Image,
+                options =>
+                    options.MapFrom(src => src.ImageName));
+
         CreateMap<Employee, EmployeeResponse>()
             .ForMember(d => d.Department,
                 options =>
-                    options.MapFrom(src => src.Department.Name));
+                    options.MapFrom(src => src.Department.Name))
+            .ForMember(e => e.Image,
+                options =>
+                    options.MapFrom(src => src.ImageName));
+
 
         CreateMap<EmployeeRequest, Employee>();
         CreateMap<EmployeeUpdateRequest, Employee>();
