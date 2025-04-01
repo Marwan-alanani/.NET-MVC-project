@@ -1,0 +1,15 @@
+@model DepartmentDetailsResponse
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "_Layout";
+}
+
+<h1 class="my-5 w-75">Department Details</h1>
+
+<partial name="Partials/DetailsDeletePartial" />
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-success">Edit</a>
+        <a asp-action="Index" class="btn btn-outline-dark">Back To list</a>
+    </div>
+</div>
