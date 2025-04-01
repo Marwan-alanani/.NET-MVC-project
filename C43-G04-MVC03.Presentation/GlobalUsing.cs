@@ -1,4 +1,5 @@
 global using C43_G04_MVC03.BLL.DataTrasferObjects.Employees;
+global using C43_G04_MVC03.BLL.Services.AttachmentService;
 global using C43_G04_MVC03.BLL.Services;
 global using Microsoft.AspNetCore.Mvc;
 global using C43_G04_MVC03.BLL.DataTrasferObjects.Departments;

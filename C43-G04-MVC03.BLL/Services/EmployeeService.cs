@@ -1,12 +1,11 @@
-global using AutoMapper;
-global using C43_G04_MVC03.Presentation.DAL.Models;
-
 namespace C43_G04_MVC03.BLL.Services;
-
-public class EmployeeService(IUnitOfWork unitOfWork, IMapper mapper) : IEmployeeService
+public class EmployeeService(IUnitOfWork unitOfWork,
+    IMapper mapper ,
+    IAttachmentService attachmentService) : IEmployeeService
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly IMapper _mapper = mapper;
+    private readonly IAttachmentService _attachmentService = attachmentService; 
 
 
     // Get All

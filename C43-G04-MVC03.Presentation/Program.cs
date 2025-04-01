@@ -1,7 +1,4 @@
-using C43_G04_MVC03.Presentation.Services;
-
 namespace C43_G04_MVC03.Presentation;
-
 public class Program
 {
     public static void Main()
@@ -28,6 +25,8 @@ public class Program
 
         builder.Services.AddScoped<Func<IEmployeeRepository>>(provider =>
             provider.GetRequiredService<IEmployeeRepository>);
+
+        builder.Services.AddTransient<IAttachmentService, AttachmentService>();
 
 
         // LifeTime services
