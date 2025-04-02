@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Identity;
 
 namespace C43_G04_MVC03.Presentation.Controllers;
 
-public class AccountController(UserManager<ApplicationUser> userManager) : Controller
+public class AccountController(UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager) : Controller
 {
     private readonly UserManager<ApplicationUser> _userManager = userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager = signInManager;
 
+    #region Register
     [HttpGet]
     public IActionResult Register()
     {
@@ -36,12 +39,42 @@ public class AccountController(UserManager<ApplicationUser> userManager) : Contr
         
         return View(model);
     }
+    #endregion
 
+    #region Login
     [HttpGet]
     public IActionResult Login()
     {
         return View();
     }
+    
+    [HttpPost]
+    public IActionResult Login(LoginViewModel model)
+    {
+        if (!ModelState.IsValid) return View(model);
+        var user = _userManager.FindByNameAsync(model.Email).Result;
+        if (user is not null)
+        {
+            if (_userManager.CheckPasswordAsync(user, model.Password).Result)
+            {
+                var result = _signInManager.PasswordSignInAsync(user, model.Password,
+                    model.RememberMe, false).Result;
+                if(result.Succeeded) return RedirectToAction("Index", "Home");
+            }
+        }
+        ModelState.AddModelError(string.Empty, "Invalid Email or Password.");
+        return View(model);
+    }
+    #endregion
+    
+    #region SignOut
+
+    public IActionResult SignOut()
+    {
+        _signInManager.SignOutAsync().GetAwaiter().GetResult();
+        return RedirectToAction(nameof(Login));
+    }
+    #endregion
 }
 /* Security
  *

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace C43_G04_MVC03.Presentation.Controllers;
@@ -13,6 +14,7 @@ public class EmployeesController(
     private readonly ILogger<DepartmentsController> _logger = logger;
 
     // GET
+    [Authorize]
     [HttpGet]
     public IActionResult Index(string? SearchValue)
     {

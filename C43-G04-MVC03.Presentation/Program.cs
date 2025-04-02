@@ -2,6 +2,7 @@ using C43_G04_MVC03.Presentation.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace C43_G04_MVC03.Presentation;
+
 public class Program
 {
     public static void Main()
@@ -21,7 +22,7 @@ public class Program
         builder.Services.AddScoped<IDepartmentService, DepartmentService>();
         builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         builder.Services.AddAutoMapper(typeof(AssemblyReference).Assembly);
-        
+
         builder.Services.AddScoped<Func<IDepartmentRepository>>(provider =>
             () => provider.GetRequiredService<IDepartmentRepository>());
 
@@ -35,8 +36,19 @@ public class Program
                 options.User.RequireUniqueEmail = true;
                 options.User.RequireUniqueEmail = true;
             })
-            .AddEntityFrameworkStores<ApplicationDbContext>() ;
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
+        // // Configuration of default redirect path, if not authorized
+        // builder.Services.ConfigureApplicationCookie(options =>
+        // {
+        //     options.LoginPath = "/Account/Login";
+        // });
+
+        // // Configuration of default redirect path, if not authorized
+        // builder.Services.AddAuthentication("Cookie").AddCookie(options =>
+        // {
+        //     options.LoginPath = "/Account/Login";
+        // });
 
         // LifeTime services
         // builder.Services.AddSingleton<ISingletonSerivce, SingletonService>(); // Creates one instance per application
@@ -57,6 +69,7 @@ public class Program
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(
