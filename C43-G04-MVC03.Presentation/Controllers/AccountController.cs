@@ -2,7 +2,10 @@ namespace C43_G04_MVC03.Presentation.Controllers;
 
 public class AccountController : Controller
 {
-    
+    public IActionResult Register()
+    {
+        return View();
+    }
 }
 /* Security
  * 
