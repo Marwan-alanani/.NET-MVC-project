@@ -1,3 +1,6 @@
+using C43_G04_MVC03.Presentation.DAL.Models;
+using Microsoft.AspNetCore.Identity;
+
 namespace C43_G04_MVC03.Presentation;
 public class Program
 {
@@ -26,6 +29,13 @@ public class Program
             provider.GetRequiredService<IEmployeeRepository>);
 
         builder.Services.AddTransient<IAttachmentService, AttachmentService>();
+
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext>() ;
 
 
         // LifeTime services

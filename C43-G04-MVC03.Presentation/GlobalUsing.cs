@@ -8,4 +8,6 @@ global using C43_G04_MVC03.Presentation.DAL.Data.Context;
 global using C43_G04_MVC03.Presentation.DAL.Repositories;
 global using Microsoft.EntityFrameworkCore;
 global using C43_G04_MVC03.Presentation.DAL.Models.Common;
+global using System.ComponentModel.DataAnnotations;
+global using Microsoft.AspNetCore.Mvc.TagHelpers;
 
